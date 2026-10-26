@@ -128,7 +128,7 @@ export default function Books() {
               <td>{b.title}</td>
               <td>{b.author}</td>
               <td>{b.genre}</td>
-              <td>{STATUS_LABELS[b.status]}</td>
+              <td><span className={`badge ${b.status}`}>{STATUS_LABELS[b.status]}</span></td>
               <td>{b.price ?? '-'}</td>
               <td>{b.pages ?? '-'}</td>
               {user.role === 'ADMIN' && <td>{b.user?.name}</td>}

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
 import Login from './pages/Login';
@@ -17,7 +18,19 @@ function Protected({ children, adminOnly }) {
 
 function Nav() {
   const { user, logout } = useAuth();
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   if (!user) return null;
+
   return (
     <nav>
       <strong>📚 Library</strong>
@@ -26,6 +39,13 @@ function Nav() {
       <Link to="/insights">Insights</Link>
       {user.role === 'ADMIN' && <Link to="/admin">Admin</Link>}
       <span className="spacer" />
+      <button
+        className="theme-toggle"
+        title="Ndërro temën"
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      >
+        {theme === 'dark' ? '☀️' : '🌙'}
+      </button>
       <span>{user.name} ({user.role})</span>
       <button className="secondary" onClick={logout}>Dil</button>
     </nav>
