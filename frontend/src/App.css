@@ -16,3 +16,7 @@ table { width: 100%; border-collapse: collapse; background: #fff; border-radius:
 th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e5e7eb; }
 th { background: #e5e7eb; }
 .error { color: #dc2626; margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chip { font-size: 13px; padding: 6px 10px; margin: 0; }
+.meta { color: #64748b; font-size: 14px; }
+pre { background: #1f2937; color: #e5e7eb; padding: 12px; border-radius: 6px; overflow-x: auto; }
