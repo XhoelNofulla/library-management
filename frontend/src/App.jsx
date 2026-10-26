@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Books from './pages/Books';
 import Admin from './pages/Admin';
 import Assistant from './pages/Assistant';
+import Insights from './pages/Insights';
 import './App.css';
 
 function Protected({ children, adminOnly }) {
@@ -22,6 +23,7 @@ function Nav() {
       <strong>📚 Library</strong>
       <Link to="/">Librat</Link>
       <Link to="/assistant">AI Assistant</Link>
+      <Link to="/insights">Insights</Link>
       {user.role === 'ADMIN' && <Link to="/admin">Admin</Link>}
       <span className="spacer" />
       <span>{user.name} ({user.role})</span>
@@ -41,6 +43,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Protected><Books /></Protected>} />
             <Route path="/assistant" element={<Protected><Assistant /></Protected>} />
+            <Route path="/insights" element={<Protected><Insights /></Protected>} />
             <Route path="/admin" element={<Protected adminOnly><Admin /></Protected>} />
           </Routes>
         </main>

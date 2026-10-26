@@ -11,6 +11,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/books', require('./routes/books'));
 app.use('/api/admin', require('./routes/admin'));
 app.use('/api/ai', require('./routes/ai'));
+app.use('/api/insights', require('./routes/insights'));
 
 app.use((err, req, res, next) => {
   console.error(err);
