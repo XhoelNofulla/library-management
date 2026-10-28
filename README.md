@@ -22,7 +22,7 @@ React + Vite, Node.js + Express, PostgreSQL + Prisma, JWT, Ollama (`qwen2.5-code
 - **Book**: id, title, author, genre, status, price, pages, createdAt, userId
 - Lidhja: **një User ka shumë Book** (`Book.userId`, fshirje në kaskadë)
 
-## Si ta nisësh me Docker (rekomandohet)
+## Si ta nisësh me Docker 
 
 Kërkon Docker Desktop.
 
@@ -69,25 +69,6 @@ Hyrje: `admin@test.com` / `admin123` (admin). Përdoruesit demo: `alba@test.com`
 
 **Siguria e text-to-SQL:** pranohet vetëm një `SELECT`; bllokohen komentet, `;` dhe fjalët INSERT/UPDATE/DELETE/DROP etj.; query ekzekutohet në transaksion vetëm-lexim me timeout 5s dhe `LIMIT 100`; përdoruesi i zakonshëm sheh vetëm të dhënat e veta (view-t e përkohshme sipas rolit); fjalëkalimet nuk ekspozohen kurrë. Nëse modeli dështon, hyn një parser me fjalë kyçe (anglisht dhe shqip).
 
-## Testet
-
-```bash
-docker exec library_db psql -U library -d library -c "CREATE DATABASE library_test;"
-cd backend
-DATABASE_URL="postgresql://library:library123@localhost:5432/library_test?schema=public" npx prisma migrate deploy
-npm test
-```
-
-Përfshijnë unit tests për validimin e SQL-it dhe integration tests për auth, CRUD, role dhe admin (33 teste).
-
-## Struktura
-
-```
-backend/   Express API, Prisma, testet
-frontend/  React (Vite)
-docker-compose.yml
-```
-
 ## Pamje
 
-(Shto këtu screenshots: login, lista e librave, AI Assistant, Insights, Admin.)
+
