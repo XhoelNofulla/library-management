@@ -24,6 +24,7 @@ const BOOKS = {
 };
 
 const USERS = [
+  { name: 'Admin', email: 'admin@test.com', role: 'ADMIN', picks: [] },
   { name: 'Alba', email: 'alba@test.com', picks: [...BOOKS.fantasy, BOOKS.scifi[0], BOOKS.scifi[1]] },
   { name: 'Besnik', email: 'besnik@test.com', picks: [...BOOKS.scifi, BOOKS.fantasy[0], BOOKS.classic[0]] },
   { name: 'Elira', email: 'elira@test.com', picks: [...BOOKS.classic, BOOKS.fantasy[1], BOOKS.scifi[2]] },
@@ -36,7 +37,11 @@ async function main() {
   for (const u of USERS) {
     const exists = await prisma.user.findUnique({ where: { email: u.email } });
     if (exists) continue;
-    const user = await prisma.user.create({ data: { name: u.name, email: u.email, password } });
+    const pwd = u.role === 'ADMIN' ? await bcrypt.hash('admin123', 10) : password;
+    const user = await prisma.user.create({
+      data: { name: u.name, email: u.email, password: pwd, role: u.role || 'USER' },
+    });
+    if (!u.picks.length) continue;
     await prisma.book.createMany({
       data: u.picks.map(([title, author, genre, pages, price], i) => ({
         title, author, genre, pages, price,
@@ -45,7 +50,8 @@ async function main() {
       })),
     });
   }
-  console.log('Seed përfundoi. Përdoruesit demo: alba/besnik/elira @test.com, fjalëkalimi test123');
+  console.log('Seed përfundoi. Admin: admin@test.com/admin123. Demo: alba/besnik/elira @test.com, fjalëkalimi test123');
 }
+
 
 main().finally(() => prisma.$disconnect());
