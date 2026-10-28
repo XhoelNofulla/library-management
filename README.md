@@ -69,5 +69,6 @@ Hyrje: `admin@test.com` / `admin123` (admin). Përdoruesit demo: `alba@test.com`
 
 **Siguria e text-to-SQL:** pranohet vetëm një `SELECT`; bllokohen komentet, `;` dhe fjalët INSERT/UPDATE/DELETE/DROP etj.; query ekzekutohet në transaksion vetëm-lexim me timeout 5s dhe `LIMIT 100`; përdoruesi i zakonshëm sheh vetëm të dhënat e veta (view-t e përkohshme sipas rolit); fjalëkalimet nuk ekspozohen kurrë. Nëse modeli dështon, hyn një parser me fjalë kyçe (anglisht dhe shqip).
 
+## Pamje
 
 
